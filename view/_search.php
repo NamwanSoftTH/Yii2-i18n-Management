@@ -19,6 +19,6 @@
 ]);?>
     <?=\yii\helpers\Html::activeTextInput($model, 'q[search]', ['class' => 'form-control', 'placeholder' => Yii::t('system', 'Search') . '...']);?>
     <button class="btn btn-info" type="submit"><i class="fa fa-search"></i> <?=Yii::t('system', 'Search');?></button>
-    <?=\yii\helpers\Html::button('<i class="fad fa-plus-square"></i> ' . Yii::t('system', 'Create'), ['class' => 'btn btn-primary action-create']);?>
+    <?=(Yii::$app->user->identity->role == 'developer')?\yii\helpers\Html::button('<i class="fad fa-plus-square"></i> ' . Yii::t('system', 'Create'), ['class' => 'btn btn-primary action-create']) : null;?>
 </div>
 <?php $form::end();?>
