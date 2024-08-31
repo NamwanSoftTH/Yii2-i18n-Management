@@ -31,9 +31,9 @@
 </div>
 <div class="row footer">
     <div class="col-md-12 text-center">
-        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-save"></i> <?=Yii::t('system', 'Save');?></button>
-        <button type="reset" class="btn btn-warning btn-sm"><i class="fa fa-lg fa-history"></i> <?=Yii::t('system', 'Reset');?></button>
-        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fa fa-lg fa-times"></i> <?=Yii::t('system', 'Cancel');?></button>
+        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-save"></i> <?=Yii::t('app', 'Save');?></button>
+        <button type="reset" class="btn btn-warning btn-sm"><i class="fa fa-lg fa-history"></i> <?=Yii::t('app', 'Reset');?></button>
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fa fa-lg fa-times"></i> <?=Yii::t('app', 'Cancel');?></button>
     </div>
 </div>
 <?php $form::end();?>

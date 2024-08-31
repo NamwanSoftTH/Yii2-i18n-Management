@@ -38,23 +38,23 @@
         ['class' => 'yii\grid\SerialColumn'],
         [
             'class'          => 'yii\grid\ActionColumn',
-            'header'         => Yii::t('system', 'Manage'),
+            'header'         => Yii::t('app', 'Manage'),
             'contentOptions' => ['class' => 'text-center p-1', 'style' => 'min-width:110px;width:110px;'],
-            'template'       => '<a href="javascript:;" class="btn btn-outline btn-outline-dashed btn-outline-info btn-active-light-info btn-sm w-100" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">' . Yii::t('system', 'Manage') . '&nbsp;<i class="fal fa-angle-down"></i></a><div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fs-7 w-175px" data-kt-menu="true">{view}{update}{delete}</div>',
+            'template'       => '<a href="javascript:;" class="btn btn-outline btn-outline-dashed btn-outline-info btn-active-light-info btn-sm w-100" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">' . Yii::t('app', 'Manage') . '&nbsp;<i class="fal fa-angle-down"></i></a><div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fs-7 w-175px" data-kt-menu="true">{view}{update}{delete}</div>',
             'buttons'        => [
                 'view'   => function ($url, $model, $key) {
                     return '<div class="menu-item">' . Html::a(
-                        '<span class="menu-icon"><i class="fas fa-eye"></i></span><span class="menu-title">' . Yii::t('system', 'Detail') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-view']
+                        '<span class="menu-icon"><i class="fas fa-eye"></i></span><span class="menu-title">' . Yii::t('app', 'Detail') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-view']
                     ) . '</div>';
                 },
                 'update' => function ($url, $model, $key) {
                     return '<div class="menu-item">' . Html::a(
-                        '<span class="menu-icon"><i class="fas fa-edit"></i></span><span class="menu-title">' . Yii::t('system', 'Update') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-update']
+                        '<span class="menu-icon"><i class="fas fa-edit"></i></span><span class="menu-title">' . Yii::t('app', 'Update') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-update']
                     ) . '</div>';
                 },
                 'delete' => function ($url, $model, $key) {
                     return '<div class="menu-item">' . Html::a(
-                        '<span class="menu-icon"><i class="fas fa-trash-alt"></i></span><span class="menu-title">' . Yii::t('system', 'Delete') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-delete']
+                        '<span class="menu-icon"><i class="fas fa-trash-alt"></i></span><span class="menu-title">' . Yii::t('app', 'Delete') . '</span>', 'javascript:;', ['data-key' => $key, 'class' => 'menu-link action-delete']
                     ) . '</div>';
                 },
             ],
