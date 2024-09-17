@@ -31,9 +31,9 @@ class i18nMsg extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => Yii::t('app', 'Id.'),
-            'language'    => Yii::t('app', 'Language'),
-            'translation' => Yii::t('app', 'Translation'),
+            'id'          => Yii::t('system', 'Id.'),
+            'language'    => Yii::t('system', 'Language'),
+            'translation' => Yii::t('system', 'Translation'),
         ];
     }
 

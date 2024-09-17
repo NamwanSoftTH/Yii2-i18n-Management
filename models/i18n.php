@@ -32,9 +32,9 @@ class i18n extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'       => Yii::t('app', 'Id.'),
-            'category' => Yii::t('app', 'Category'),
-            'message'  => Yii::t('app', 'Message'),
+            'id'       => Yii::t('system', 'Id.'),
+            'category' => Yii::t('system', 'Category'),
+            'message'  => Yii::t('system', 'Message'),
         ];
     }
 
