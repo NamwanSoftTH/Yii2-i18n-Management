@@ -19,27 +19,25 @@ class i18nSearch extends i18n
 
     public function search($params)
     {
-        $query = get_class($this)::find();
+        $query = get_class($this)::find()->alias('tbM')
+            ->joinWith('trans trans');
 
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query'      => $query,
             'sort'       => ['defaultOrder' => ['id' => SORT_DESC]],
             'pagination' => [],
         ]);
-
         $this->load($params);
-
         if (!$this->validate()) {
             return $dataProvider;
         }
         if ($this->q['category']) {
-            $query->andFilterWhere(['category' => $this->q['category']]);
+            $query->andFilterWhere(['tbM.category' => $this->q['category']]);
         }
         $query->andFilterWhere(['OR',
-            ['like', 'category', $this->q['search']],
-            ['like', 'message', $this->q['search']],
+            ['like', 'tbM.message', $this->q['search']],
+            ['like', 'trans.translation', $this->q['search']],
         ]);
-
         return $dataProvider;
     }
 

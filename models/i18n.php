@@ -38,6 +38,11 @@ class i18n extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getTrans()
+    {
+        return $this->hasMany(i18nMsg::className(), ['id' => 'id']);
+    }
+
     public function getTranslation($lng)
     {
         return i18nMsg::findOne(['id' => $this->id, 'language' => $lng])->translation;
