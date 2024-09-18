@@ -17,7 +17,7 @@
         $deptColumns[] = [
             'label'   => $item['text'],
             'options' => ['style' => 'min-width:250px;width:250px;'],
-            'value'   => fn($model)   => $model->getTranslation($k),
+            'value'   => fn($model)   => $model->translat[$k],
         ];
     }
 ?>

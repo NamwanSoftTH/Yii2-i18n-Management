@@ -1,5 +1,4 @@
 <?php
-    use namwansoft\i18nManagement\models\i18nMsg;
     $form = \yii\bootstrap5\ActiveForm::begin([
         'id'                     => 'form-action',
         'enableClientValidation' => true,
@@ -21,10 +20,9 @@
     <?php
         foreach (AR_Lang as $k => $item) {
             if ($k == 'en-US') {continue;}
-            $modelS = i18nMsg::findOne(['id' => $model->id, 'language' => $k]);
         ?>
     <div class="col-md-6">
-        <?=$form->field($model, "message2[$k]")->textInput(['value' => $modelS->translation])->label($item['text']);?>
+        <?=$form->field($model, "message2[$k]")->textInput(['value' => $model->translat[$k]])->label($item['text']);?>
     </div>
     <?php
     }?>

@@ -10,10 +10,14 @@ use yii\web\Response;
 
 class Controller extends \yii\web\Controller
 {
+
+    private $modelClass = i18n::class;
+    private $modelMsgClass = i18nMsg::class;
+
     public function actionIndex()
     {
         $arList = [];
-        foreach (\Yii::$app->i18n->translations as $k => $v) {
+        foreach (Yii::$app->i18n->translations as $k => $v) {
             $arList[$k] = $k;
         }
         $searchModel = new i18nSearch();
@@ -25,9 +29,14 @@ class Controller extends \yii\web\Controller
         ]);
     }
 
+    public function actionView($id)
+    {
+        return $this->renderAjax('@vendor/namwansoft/yii2-i18n-management/view/view', ['model' => $this->modelClass::findOne($id)]);
+    }
+
     public function actionValidation($id = null)
     {
-        $model = $id === null ? new i18n : i18n::findOne($id);
+        $model = $id === null ? new $this->modelClass : $this->modelClass::findOne($id);
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return \yii\bootstrap5\ActiveForm::validate($model);
@@ -36,25 +45,28 @@ class Controller extends \yii\web\Controller
 
     public function actionCreate()
     {
-        $model = new i18n();
+        $model = new $this->modelClass();
         if ($model->load(Yii::$app->request->post())) {
-            $msgSub = $model->message2;
+            $msgSub = $model->message2 ? $model->message2 : AR_Lang;
             $model->message2 = null;
             if ($status = $model->save()) {
                 foreach ($msgSub as $k => $v) {
-                    if (!$v) {continue;}
-                    $modelS = i18nMsg::findOne(['id' => $model->id, 'language' => $k]);
+                    $modelS = $this->modelMsgClass::findOne(['id' => $model->id, 'language' => $k]);
                     if (!$modelS) {
-                        $modelS = new i18nMsg;
+                        $modelS = new $this->modelMsgClass;
                         $modelS->id = $model->id;
                         $modelS->language = $k;
                     }
-                    $modelS->translation = $v;
-                    $modelS->save();
+                    if ($modelS && $v) {
+                        $modelS->translation = $v;
+                        $lng['save'] = [$k => $modelS->save()];
+                    } else if ($modelS) {
+                        $lng['delete'] = [$k => $modelS->delete()];
+                    }
                 }
             }
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['status' => $status];
+            return ['status' => $status, 'lng' => $lng];
         }
         $model->category = 'app';
         return $this->renderAjax('@vendor/namwansoft/yii2-i18n-management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
@@ -62,25 +74,29 @@ class Controller extends \yii\web\Controller
 
     public function actionUpdate($id)
     {
-        $model = i18n::findOne($id);
+        $lng = [];
+        $model = $this->modelClass::findOne($id);
         if ($model->load(Yii::$app->request->post())) {
-            $msgSub = $model->message2;
+            $msgSub = $model->message2 ? $model->message2 : AR_Lang;
             $model->message2 = null;
             if ($status = $model->save()) {
                 foreach ($msgSub as $k => $v) {
-                    if (!$v) {continue;}
-                    $modelS = i18nMsg::findOne(['id' => $model->id, 'language' => $k]);
+                    $modelS = $this->modelMsgClass::findOne(['id' => $model->id, 'language' => $k]);
                     if (!$modelS) {
-                        $modelS = new i18nMsg;
+                        $modelS = new $this->modelMsgClass;
                         $modelS->id = $model->id;
                         $modelS->language = $k;
                     }
-                    $modelS->translation = $v;
-                    $modelS->save();
+                    if ($modelS && $v) {
+                        $modelS->translation = $v;
+                        $lng['save'] = [$k => $modelS->save()];
+                    } else if ($modelS) {
+                        $lng['delete'] = [$k => $modelS->delete()];
+                    }
                 }
             }
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['status' => $status];
+            return ['status' => $status, 'lng' => $lng];
         }
         return $this->renderAjax('@vendor/namwansoft/yii2-i18n-management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
     }
@@ -88,13 +104,13 @@ class Controller extends \yii\web\Controller
     public function actionDelete($id)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return ['status' => i18n::findOne($id)->delete()];
+        return ['status' => $this->modelClass::findOne($id)->delete()];
     }
 
     private function getGroup()
     {
         $arList = [];
-        foreach (\Yii::$app->i18n->translations as $k => $v) {
+        foreach (Yii::$app->i18n->translations as $k => $v) {
             $arList[$k] = $k;
         }
         return $arList;
