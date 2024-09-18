@@ -18,7 +18,7 @@ class Controller extends \yii\web\Controller
         }
         $searchModel = new i18nSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('@vendor/namwansoft/yii2-i18n-Management/view/index', [
+        return $this->render('@vendor/namwansoft/yii2-i18n-management/view/index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             'arList'       => $this->getGroup(),
@@ -57,7 +57,7 @@ class Controller extends \yii\web\Controller
             return ['status' => $status];
         }
         $model->category = 'app';
-        return $this->renderAjax('@vendor/namwansoft/yii2-i18n-Management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
+        return $this->renderAjax('@vendor/namwansoft/yii2-i18n-management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
     }
 
     public function actionUpdate($id)
@@ -82,7 +82,7 @@ class Controller extends \yii\web\Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ['status' => $status];
         }
-        return $this->renderAjax('@vendor/namwansoft/yii2-i18n-Management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
+        return $this->renderAjax('@vendor/namwansoft/yii2-i18n-management/view/_form', ['model' => $model, 'arList' => $this->getGroup()]);
     }
 
     public function actionDelete($id)
