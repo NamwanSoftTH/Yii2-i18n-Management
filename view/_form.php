@@ -1,12 +1,4 @@
-<?php
-    $form = \yii\bootstrap5\ActiveForm::begin([
-        'id'                     => 'form-action',
-        'enableClientValidation' => true,
-        'enableAjaxValidation'   => true,
-        'validationUrl'          => ['validation', 'id' => (!$model->isNewRecord) ? $model->id : null],
-        'fieldClass'             => 'common\components\YiiExt\MyActiveField',
-        'fieldConfig'            => ['template' => Yii::$app->MyClass::$fieldFloating],
-]);?>
+<?php $form = \yii\bootstrap5\ActiveForm::begin(['validationUrl' => ['validation', 'id' => (!$model->isNewRecord) ? $model->id : null]]);?>
 <div class="row">
     <div class="col-md-6">
         <?=$form->field($model, 'category')->widget(\kartik\select2\Select2::classname(), array_replace_recursive(\Yii::$app->MyClass::$Select2, ['data' => $arList, 'pluginOptions' => ['allowClear' => false]]));?>
