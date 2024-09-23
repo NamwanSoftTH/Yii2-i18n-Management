@@ -1,6 +1,6 @@
 <?php
-    $opt1 = ['class' => 'fw-semibold bg-warning text-end'];
-    $opt2 = ['class' => 'fw-semibold bg-warning'];
+    $opt1 = ['class' => 'fw-semibold text-end'];
+    $opt2 = ['class' => 'fw-semibold'];
     $attributes = ['id', 'category', ['attribute' => 'message', 'captionOptions' => $opt1, 'contentOptions' => $opt2]];
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
