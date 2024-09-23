@@ -1,9 +1,10 @@
 <?php
-    $opt = ['class' => 'fw-semibold bg-warning text-end'];
-    $attributes = ['id', 'category', ['attribute' => 'message', 'captionOptions' => $opt, 'contentOptions' => $opt]];
+    $opt1 = ['class' => 'fw-semibold bg-warning text-end'];
+    $opt2 = ['class' => 'fw-semibold bg-warning'];
+    $attributes = ['id', 'category', ['attribute' => 'message', 'captionOptions' => $opt1, 'contentOptions' => $opt2]];
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
-        $attributes[] = ['label' => '<i class="fad fa-language text-primary me-2"></i>' . $item['text'], 'value' => $model->translat[$k], 'captionOptions' => $opt, 'contentOptions' => $opt];
+        $attributes[] = ['label' => '<i class="fad fa-language text-primary me-2"></i>' . $item['text'], 'value' => $model->translat[$k], 'captionOptions' => $opt1, 'contentOptions' => $opt2];
     }
     array_push($attributes, 'created_at:dateTime', 'updated_at:dateTime');
 ?>
