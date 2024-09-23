@@ -1,5 +1,5 @@
 <?php
-    $opt = ['class' => 'fw-semibold']; //bg-warning
+    $opt = ['class' => 'fw-semibold bg-warning text-end'];
     $attributes = ['id', 'category', ['attribute' => 'message', 'captionOptions' => $opt, 'contentOptions' => $opt]];
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
