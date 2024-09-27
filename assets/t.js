@@ -1,8 +1,8 @@
 // Custom from https://github.com/roman-w3lifer-grinyov/yii2-i18n-js
 
-const i18nJson = {};
+let i18nJson = {};
 $.getJSON(`${UrlAll.home}/i18n`, response => {
-  const i18nJson = response;
+  i18nJson = response;
 });
 if (!("t" in window.yii)) {
   if (!document.documentElement.lang)
