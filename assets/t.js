@@ -1,12 +1,7 @@
 // Custom from https://github.com/roman-w3lifer-grinyov/yii2-i18n-js
-const i18nJson = $.getJSON(`${UrlAll.home}/i18n`, function (result) {
-  try {
-    JSON.parse(result);
-    return result;
-  } catch (e) {
-    return {};
-  }
-});
+(async () => {
+  const i18nJson = await $.getJSON(`${UrlAll.home}/i18n`);
+})();
 if (!("t" in window.yii)) {
   if (!document.documentElement.lang)
     throw new Error(
