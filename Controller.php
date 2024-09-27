@@ -120,9 +120,13 @@ class Controller extends \yii\web\Controller
     public function actionJson()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->cache->exists('i18n')) {
+            return Yii::$app->cache->get('i18n');
+        }
         $catMsg = ArrayHelper::map(i18n::find()->all(), 'message', function ($item) {
             return ['id' => $item->id, 'message' => $item->message] + ArrayHelper::map($item->trans, 'language', 'translation');
         }, 'category');
+        Yii::$app->cache->set('i18n', $catMsg);
         return $catMsg;
     }
 }
