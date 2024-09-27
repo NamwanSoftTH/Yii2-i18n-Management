@@ -6,6 +6,7 @@ use namwansoft\i18nManagement\models\i18n;
 use namwansoft\i18nManagement\models\i18nMsg;
 use namwansoft\i18nManagement\models\i18nSearch;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Response;
 
 class Controller extends \yii\web\Controller
@@ -114,5 +115,14 @@ class Controller extends \yii\web\Controller
             $arList[$k] = $k;
         }
         return $arList;
+    }
+
+    public function actionJson()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $catMsg = ArrayHelper::map(i18n::find()->all(), 'message', function ($item) {
+            return ['id' => $item->id, 'message' => $item->message] + ArrayHelper::map($item->trans, 'language', 'translation');
+        }, 'category');
+        return $catMsg;
     }
 }
