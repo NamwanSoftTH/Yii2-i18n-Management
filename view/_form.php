@@ -14,7 +14,7 @@
             if ($k == 'en-US') {continue;}
         ?>
     <div class="col-md-6">
-        <?=$form->field($model, "message2[$k]")->textInput(['value' => $model->translat[$k]])->label($item['text']);?>
+        <?=$form->field($model, "message2[$k]")->textInput(['value' => $model->translat[$k]])->label('<img class="me-1 mh-15px" src="https://space.cashauto.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text']);?>
     </div>
     <?php
     }?>

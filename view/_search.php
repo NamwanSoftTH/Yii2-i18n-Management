@@ -17,5 +17,6 @@
     <?=\yii\helpers\Html::activeTextInput($model, 'q[search]', ['class' => 'form-control', 'placeholder' => Yii::t('system', 'Search') . '...']);?>
     <button class="btn btn-info" type="submit"><i class="fad fa-search fs-2 me-2"></i><?=Yii::t('system', 'Search');?></button>
     <?=(Yii::$app->user->identity->role == 'developer')?\yii\helpers\Html::button('<i class="fad fa-plus-square fs-2 me-2"></i> ' . Yii::t('system', 'Create'), ['class' => 'btn btn-primary action-create']) : null;?>
+    <button class="btn btn-warning actClearCache" type="button"><i class="fad fa-recycle fs-2 me-2"></i><?=Yii::t('system', 'Clear Cache');?></button>
 </div>
 <?php $form::end();?>

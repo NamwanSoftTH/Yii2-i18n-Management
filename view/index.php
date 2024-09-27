@@ -10,12 +10,26 @@
     Modal::begin();
     Modal::end();
     $this->registerJsFile('@themesAsset/js/form-all.js' . CDNV, ['depends' => [yii\web\JqueryAsset::className()]]);
+    $this->registerJs('
+    $("body").on("click", ".actClearCache", function (e) {
+  $.ajax({
+    type: "GET",
+    url: `${UrlAll.controllerId}/clear-cache`,
+    beforeSend: () => UseblockUI(true),
+    success:() => UseblockUI(false),
+    error: function (j1, j2, j3) {
+      UseblockUI(false);
+      handleAjaxError(j1, j2, j3);
+    }
+  });
+});
+    ', yii\web\View::POS_END);
 
     $deptColumns = [];
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
         $deptColumns[] = [
-            'label'   => $item['text'],
+            'header'  => '<img class="me-1 mh-15px" src="https://space.cashauto.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text'],
             'options' => ['style' => 'min-width:250px;width:250px;'],
             'value'   => fn($model)   => $model->translat[$k],
         ];

@@ -117,6 +117,11 @@ class Controller extends \yii\web\Controller
         return $arList;
     }
 
+    public function actionClearCache()
+    {
+        return Yii::$app->cache->delete('i18n');
+    }
+
     public function actionJson()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
