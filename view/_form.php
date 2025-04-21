@@ -1,4 +1,4 @@
-<?php $form = \yii\bootstrap5\ActiveForm::begin(['validationUrl' => ['validation', 'id' => (!$model->isNewRecord) ? $model->id : null]]);?>
+<?php $form = \yii\bootstrap5\ActiveForm::begin(['validationUrl' => ['validation', 'id' => (!$model->isNewRecord) ? $model->id : null]]); ?>
 <div class="row">
     <div class="col-md-6">
         <?=$form->field($model, 'category')->widget(\kartik\select2\Select2::classname(), array_replace_recursive(\Yii::$app->MyClass::$Select2, ['data' => $arList, 'pluginOptions' => ['allowClear' => false]]));?>
@@ -14,7 +14,7 @@
             if ($k == 'en-US') {continue;}
         ?>
     <div class="col-md-6">
-        <?=$form->field($model, "message2[$k]")->textInput(['value' => $model->translat[$k]])->label('<img class="me-1 mh-15px" src="https://space.cashauto.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text']);?>
+        <?=$form->field($model, "message2[$k]")->textInput(['value' => $model->translat[$k]])->label('<img class="me-1 mh-15px" src="https://space.nwsoft.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text']);?>
     </div>
     <?php
     }?>
@@ -26,4 +26,4 @@
         <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fad fa-times fs-2 me-2"></i><?=Yii::t('system', 'Cancel');?></button>
     </div>
 </div>
-<?php $form::end();?>
+<?php $form::end(); ?>

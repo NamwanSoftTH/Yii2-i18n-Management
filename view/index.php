@@ -29,13 +29,13 @@
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
         $deptColumns[] = [
-            'header'  => '<img class="me-1 mh-15px" src="https://space.cashauto.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text'],
+            'header'  => '<img class="me-1 mh-15px" src="https://space.nwsoft.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">' . $item['text'],
             'options' => ['style' => 'min-width:250px;width:250px;'],
             'value'   => fn($model)   => $model->translat[$k],
         ];
     }
 ?>
-<?php Pjax::begin(['id' => 'grid_pjax', 'timeout' => false]);?>
+<?php Pjax::begin(['id' => 'grid_pjax', 'timeout' => false]); ?>
 <div class="card h-md-100">
     <div class="card-header px-3">
         <h3 class="card-title"><i class="fad fa-file-medical-alt me-2"></i><?=Yii::t('system', 'i18n Management');?></h3>
@@ -86,4 +86,4 @@
 ?>
     </div>
 </div>
-<?php Pjax::end();?>
+<?php Pjax::end(); ?>

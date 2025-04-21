@@ -4,7 +4,7 @@
     $attributes = ['id', 'category', ['attribute' => 'message', 'captionOptions' => $opt1, 'contentOptions' => $opt2]];
     foreach (AR_Lang as $k => $item) {
         if ($k == 'en-US') {continue;}
-        $attributes[] = ['label' => $item['text'] . '<img class="ms-1 mh-15px" src="https://space.cashauto.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">', 'value' => $model->translat[$k], 'captionOptions' => $opt1, 'contentOptions' => $opt2];
+        $attributes[] = ['label' => $item['text'] . '<img class="ms-1 mh-15px" src="https://space.nwsoft.dev/metronic8/assets/media/flags/' . $item['long'] . '.svg">', 'value' => $model->translat[$k], 'captionOptions' => $opt1, 'contentOptions' => $opt2];
     }
     array_push($attributes, 'created_at:dateTime', 'updated_at:dateTime');
 ?>
