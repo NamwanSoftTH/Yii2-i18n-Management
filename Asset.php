@@ -1,4 +1,5 @@
 <?php
+
 namespace namwansoft\i18nManagement;
 
 class Asset extends \yii\web\AssetBundle
