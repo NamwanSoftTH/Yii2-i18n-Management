@@ -14,6 +14,7 @@ class Controller extends \yii\web\Controller
 
     private $modelClass = i18n::class;
     private $modelMsgClass = i18nMsg::class;
+    private $cacheKey = 'i18n';
 
     public function actionIndex()
     {
@@ -65,6 +66,7 @@ class Controller extends \yii\web\Controller
                         $lng['delete'] = [$k => $modelS->delete()];
                     }
                 }
+                Yii::$app->cache->delete($this->cacheKey);
             }
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ['status' => $status, 'lng' => $lng];
@@ -95,6 +97,7 @@ class Controller extends \yii\web\Controller
                         $lng['delete'] = [$k => $modelS->delete()];
                     }
                 }
+                Yii::$app->cache->delete($this->cacheKey);
             }
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ['status' => $status, 'lng' => $lng];
@@ -104,8 +107,10 @@ class Controller extends \yii\web\Controller
 
     public function actionDelete($id)
     {
+        $status = $this->modelClass::findOne($id)->delete();
+        Yii::$app->cache->delete($this->cacheKey);
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return ['status' => $this->modelClass::findOne($id)->delete()];
+        return ['status' => $status];
     }
 
     private function getGroup()
@@ -119,19 +124,19 @@ class Controller extends \yii\web\Controller
 
     public function actionClearCache()
     {
-        return Yii::$app->cache->delete('i18n');
+        return Yii::$app->cache->delete($this->cacheKey);
     }
 
     public function actionJson()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        if (Yii::$app->cache->exists('i18n')) {
-            return Yii::$app->cache->get('i18n');
+        if (Yii::$app->cache->exists($this->cacheKey)) {
+            return Yii::$app->cache->get($this->cacheKey);
         }
         $catMsg = ArrayHelper::map(i18n::find()->all(), 'message', function ($item) {
             return ['id' => $item->id, 'message' => $item->message] + ArrayHelper::map($item->trans, 'language', 'translation');
         }, 'category');
-        Yii::$app->cache->set('i18n', $catMsg);
+        Yii::$app->cache->set($this->cacheKey, $catMsg);
         return $catMsg;
     }
 }
